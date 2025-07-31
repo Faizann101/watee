@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Waste Disposal Guide</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; background: #f4f7f8; color: #333;
+  }
+  header {
+    background: #2c7a7b;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem 4.5rem; /* added bottom padding for footer */
+  }
+  h1, h2 {
+    margin-bottom: 0.5rem;
+  }
+  .bins {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .bin-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+    width: 220px;
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    user-select: none; /* prevent accidental text selection on tap */
+  }
+  .bin-card:hover {
+    transform: translateY(-6px);
+  }
+  .bin-card:active {
+    background-color: #e0f7fa; /* subtle touch feedback */
+    transform: translateY(-2px);
+  }
+  .bin-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  .bin-color {
+    width: 50px; height: 50px;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+  }
+  .green { background: #2e7d32; }
+  .blue { background: #1565c0; }
+  .red { background: #c62828; }
+  .yellow { background: #f9a825; }
+  .info {
+    display: none;
+    margin-top: 1rem;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  .info.active {
+    display: block;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #2c7a7b;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 0.9rem;
+  }
+  a {
+    color: #b3e5fc;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    main {
+      font-size: 1.1rem; /* slightly larger font on small screens */
+    }
+    .bins {
+      flex-direction: column;
+      align-items: center;
+    }
+    .bin-card {
+      width: 80%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Interactive Waste Disposal Guide</h1>
+  <p>Click on each dustbin to learn what type of waste it is for</p>
+</header>
+
+<main>
+  <div class="bins">
+
+    <div class="bin-card" onclick="toggleInfo('greenInfo')">
+      <div class="bin-color green"></div>
+      <div class="bin-icon">🥬</div>
+      <h2>Green Bin</h2>
+      <p>Organic/Biodegradable Waste</p>
+      <div id="greenInfo" class="info">
+        <strong>Acceptable Waste:</strong>
+        <ul>
+          <li>Food scraps</li>
+          <li>Garden waste (leaves, grass)</li>
+          <li>Vegetable peels</li>
+          <li>Tea bags, coffee grounds</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bin-card" onclick="toggleInfo('blueInfo')">
+      <div class="bin-color blue"></div>
+      <div class="bin-icon">📦</div>
+      <h2>Blue Bin</h2>
+      <p>Recyclable Waste</p>
+      <div id="blueInfo" class="info">
+        <strong>Acceptable Waste:</strong>
+        <ul>
+          <li>Paper and cardboard</li>
+          <li>Plastic bottles and containers</li>
+          <li>Glass bottles and jars</li>
+          <li>Metal cans</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bin-card" onclick="toggleInfo('redInfo')">
+      <div class="bin-color red"></div>
+      <div class="bin-icon">☣️</div>
+      <h2>Red Bin</h2>
+      <p>Hazardous/Non-Recyclable Waste</p>
+      <div id="redInfo" class="info">
+        <strong>Acceptable Waste:</strong>
+        <ul>
+          <li>Medical waste (used bandages, syringes)</li>
+          <li>Broken glass</li>
+          <li>Chemicals and batteries</li>
+          <li>Plastic bags, wrappers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bin-card" onclick="toggleInfo('yellowInfo')">
+      <div class="bin-color yellow"></div>
+      <div class="bin-icon">🍾</div>
+      <h2>Yellow Bin</h2>
+      <p>Plastic and Metal Waste</p>
+      <div id="yellowInfo" class="info">
+        <strong>Acceptable Waste:</strong>
+        <ul>
+          <li>Plastic packaging</li>
+          <li>Metal utensils and cans</li>
+          <li>Plastic bags</li>
+          <li>Aluminum foil</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Waste Disposal Guide | <a href="https://www.epa.gov/recycle" target="_blank" rel="noopener noreferrer">More Info</a>
+</footer>
+
+<script>
+  function toggleInfo(id) {
+    const infoDiv = document.getElementById(id);
+    const allInfo = document.querySelectorAll('.info');
+    allInfo.forEach(div => {
+      if (div !== infoDiv) div.classList.remove('active');
+    });
+    infoDiv.classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
